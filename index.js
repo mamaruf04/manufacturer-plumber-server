@@ -175,6 +175,23 @@ async function run() {
             res.send(result)
         })
 
+
+        // ***    Review        **//
+
+        //21 get reviews 
+        app.get('/review', async (req, res) => {
+            const query = {}
+            const reviews = await reviewsCollection.find(query).toArray()
+            res.send(reviews)
+        })
+
+        //22 post reviews
+        app.post('/review', verifyJWT, async (req, res) => {
+            const review = req.body
+            const result = await reviewsCollection.insertOne(review)
+            res.send(result)
+        })
+
     }
     finally {
         //   await client.close();
