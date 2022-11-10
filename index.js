@@ -160,6 +160,14 @@ async function run() {
             res.send(updatedBooking,result);
         })
 
+        //32 delete order
+        app.delete('/all-order/:id', verifyJWT, verifyAdmin, async (req, res) => {
+            const id = req.params.id
+            const filter = { _id : ObjectId(id) }
+            const result = await ordersCollection.deleteOne(filter)
+            res.send(result)
+        })
+
         // ***    User        **//
 
         //15  user create or update 
