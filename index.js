@@ -144,6 +144,22 @@ async function run() {
             res.send(order)
         })
 
+        //31 payment 
+        app.patch('/order/:id', verifyJWT, async (req, res) => {
+            const id = req.params.id;
+            const payment = req.body;
+            const filter = { _id: ObjectId(id) };
+            const updatedDoc = {
+                $set: {
+                    paid: true,
+                    transactionId: payment.transactionId
+                }
+            }
+            const result = await paymentsCollection.insertOne(payment);
+            const updatedBooking = await ordersCollection.updateOne(filter, updatedDoc);
+            res.send(updatedBooking,result);
+        })
+
         // ***    User        **//
 
         //15  user create or update 
