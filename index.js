@@ -34,6 +34,19 @@ async function run() {
         const paymentsCollection = client.db("plumbtion-manufacturer").collection("payments");
 
 
+        // 18 ( middleware ) verify admin 
+        const verifyAdmin = async (req, res, next) => {
+            const requester = req.decoded.email
+            const requesterAccount = await usersCollection.findOne({ email: requester })
+            if (requesterAccount.role === 'admin') {
+                next()
+            }
+            else {
+                res.status(403).send({ message: 'Forbidden Access' });
+            }
+        }
+
+
         // ***    Tools (pipes)        **//
 
         //8 get tool 
