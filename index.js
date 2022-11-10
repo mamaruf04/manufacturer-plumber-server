@@ -138,6 +138,27 @@ async function run() {
         })
 
 
+        //17 make admin 
+        app.put('/user/admin/:email', verifyJWT, verifyAdmin, async (req, res) => {
+            const email = req.params.email;
+            const filter = { email: email };
+            const updateDoc = {
+                $set: { role: 'admin' }
+            };
+            const result = await usersCollection.updateOne(filter, updateDoc)
+            res.send(result)
+        })
+
+        app.put('/user/user/:email', verifyJWT, verifyAdmin, async (req, res) => {
+            const email = req.params.email;
+            const filter = { email: email };
+            const updateDoc = {
+                $set: { role: 'user' }
+            };
+            const result = await usersCollection.updateOne(filter, updateDoc)
+            res.send(result)
+        })
+
     }
     finally {
         //   await client.close();
