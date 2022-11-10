@@ -208,8 +208,28 @@ async function run() {
             res.send(profile)
         })
 
+        //34 get user img 
+        app.get('/profile-img/:email',verifyJWT,  async (req, res) => {
+            const email = req.params.email
+            const profile = await usersCollection.findOne({ email: email })
+            res.send(profile)
+        })
+
         //27 update profile
         app.put('/profile/:id', verifyJWT, async (req, res) => {
+            const id = req.params.id
+            const updateInfo = req.body
+            const filter = { _id: ObjectId(id) }
+            const options = { upsert: true };
+            const updateDoc = {
+                $set: updateInfo
+            };
+            const result = await usersCollection.updateOne(filter, updateDoc, options);
+            res.send(result)
+        })
+
+         //28 update img
+         app.put('/my-image/:id', verifyJWT, async (req, res) => {
             const id = req.params.id
             const updateInfo = req.body
             const filter = { _id: ObjectId(id) }
