@@ -34,6 +34,14 @@ async function run() {
         const paymentsCollection = client.db("plumbtion-manufacturer").collection("payments");
 
 
+        // ***    Tools (pipes)        **//
+
+        //8 get tool 
+        app.get('/tool', async (req, res) => {
+            const query = {}
+            const tools = await toolsCollection.find(query).toArray()
+            res.send(tools)
+        })
 
     }
     finally {
