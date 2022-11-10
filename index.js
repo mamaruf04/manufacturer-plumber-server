@@ -66,6 +66,21 @@ async function run() {
             res.send(tools)
         })
 
+        //11 available tool (pipe) update
+        app.put('/tool/:id', async (req, res) => {
+            const id = req.params.id
+            const updateTool = req.body
+            const filter = { _id: ObjectId(id) }
+            const options = { upsert: true };
+            const updateDoc = {
+                $set: {
+                    available: updateTool.available,
+                },
+            };
+            const result = await toolsCollection.updateOne(filter, updateDoc, options);
+            res.send(result)
+        })
+
     }
     finally {
         //   await client.close();
