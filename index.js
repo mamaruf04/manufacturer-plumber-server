@@ -22,6 +22,26 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 
 // console.log(uri);
 
+
+async function run() {
+    try {
+        //7
+        await client.connect();
+        const toolsCollection = client.db("plumbtion-manufacturer").collection("tools");
+        const reviewsCollection = client.db("plumbtion-manufacturer").collection("reviews");
+        const ordersCollection = client.db("plumbtion-manufacturer").collection("orders");
+        const usersCollection = client.db("plumbtion-manufacturer").collection("users");
+        const paymentsCollection = client.db("plumbtion-manufacturer").collection("payments");
+
+
+
+    }
+    finally {
+        //   await client.close();
+    }
+}
+run().catch(console.dir);
+
 //2
 app.get('/', (req, res) => {
     res.send('Plumbing server is running')
