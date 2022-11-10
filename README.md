@@ -1,30 +1,22 @@
-#  Welcome to Plumbtion Manufacture Website 
+# Welcome to Plumbtion Manufacture Website
 
+## [Client Repo](https://github.com/mamaruf04/manufacturer-plumber-client)
 
-## [Client Repo](https://github.com/EmtiazHossainE2/plumbtion-manufacturer.git)
+## [Live Link](https://plumbing-45e06.web.app/)
 
+## Features and Functionality
 
-## [Live Link](https://plumbtion-manufacturer.web.app/)
+- This project is using mongodb for server side .
+- Implement different api for database .
+- For payment i'using stripe api .
+- For secure website implement jwt .
+- using dot env for secret source code
 
+## Technology used
 
-
-##  Features and Functionality
- 
-* This project is using mongodb for server side . 
-* Implement different api for database .  
-* For payment i'using stripe api .
-* For secure website implement jwt .
-* using dot env for secret source code 
-
-
-##  Technology used 
-
-* Nodemon 
-* Cors
-* Express 
-* jsonwebtoken
-* mongodb
-* stripe
-
-
-
+- Nodemon
+- Cors
+- Express
+- jsonwebtoken
+- mongodb
+- stripe
