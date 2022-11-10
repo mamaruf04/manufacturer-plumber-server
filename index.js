@@ -114,6 +114,30 @@ async function run() {
             res.send(result)
         })
 
+
+        // ***    User        **//
+
+        //15  user create or update 
+        app.put('/user/:email', async (req, res) => {
+            const email = req.params.email;
+            const filter = { email: email };
+            const user = req.body;
+            const options = { upsert: true }
+            const updateDoc = {
+                $set: user
+            };
+            const result = await usersCollection.updateOne(filter, updateDoc, options)
+            const token = jwt.sign({ email: email }, process.env.ACCESS_TOKEN, { expiresIn: '1d' })
+            res.send({ result, token })
+        })
+
+        //16 get users 
+        app.get('/user', verifyJWT, async (req, res) => {
+            const users = await usersCollection.find().toArray()
+            res.send(users)
+        })
+
+
     }
     finally {
         //   await client.close();
