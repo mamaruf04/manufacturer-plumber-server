@@ -51,6 +51,21 @@ async function run() {
             res.send(tool)
         })
 
+        //23 add tool (pipes)
+        app.post('/tool', verifyJWT, verifyAdmin, async (req, res) => {
+            const pipe = req.body
+            const result = await toolsCollection.insertOne(pipe)
+            res.send(result)
+        })
+
+        //24 delete tool (pipe) 
+        app.delete('/tool/:id', async (req, res) => {
+            const id = req.params.id
+            const query = { _id: ObjectId(id) }
+            const tools = await toolsCollection.deleteOne(query)
+            res.send(tools)
+        })
+
     }
     finally {
         //   await client.close();
