@@ -128,6 +128,22 @@ async function run() {
         })
 
 
+        //25 get all orders
+        app.get('/all-order', verifyJWT, verifyAdmin, async (req, res) => {
+            const query = {}
+            const allOrder = await ordersCollection.find(query).toArray()
+            res.send(allOrder)
+        })
+
+        // payment 
+        //29 get  order id 
+        app.get('/order/:id', verifyJWT, async (req, res) => {
+            const id = req.params.id
+            const query = { _id: ObjectId(id) }
+            const order = await ordersCollection.findOne(query)
+            res.send(order)
+        })
+
         // ***    User        **//
 
         //15  user create or update 
