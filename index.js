@@ -168,6 +168,17 @@ async function run() {
             res.send(result)
         })
 
+        //33 shipped
+        app.put('/all-order/order/:id', verifyJWT, verifyAdmin, async (req, res) => {
+            const id = req.params.id;
+            const filter = { _id : ObjectId(id)};
+            const updateDoc = {
+                $set: { process: 'Shipped' }
+            };
+            const result = await ordersCollection.updateOne(filter, updateDoc)
+            res.send(result)
+        })
+
         // ***    User        **//
 
         //15  user create or update 
