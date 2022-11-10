@@ -43,6 +43,14 @@ async function run() {
             res.send(tools)
         })
 
+        //9 get single tool 
+        app.get('/tool/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const tool = await toolsCollection.findOne(query)
+            res.send(tool)
+        })
+
     }
     finally {
         //   await client.close();
