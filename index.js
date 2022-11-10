@@ -201,6 +201,25 @@ async function run() {
             res.send(users)
         })
 
+        //26 Profile 
+        app.get('/profile/:email', verifyJWT, async (req, res) => {
+            const email = req.params.email
+            const profile = await usersCollection.findOne({ email: email })
+            res.send(profile)
+        })
+
+        //27 update profile
+        app.put('/profile/:id', verifyJWT, async (req, res) => {
+            const id = req.params.id
+            const updateInfo = req.body
+            const filter = { _id: ObjectId(id) }
+            const options = { upsert: true };
+            const updateDoc = {
+                $set: updateInfo
+            };
+            const result = await usersCollection.updateOne(filter, updateDoc, options);
+            res.send(result)
+        })
 
         //17 make admin 
         app.put('/user/admin/:email', verifyJWT, verifyAdmin, async (req, res) => {
